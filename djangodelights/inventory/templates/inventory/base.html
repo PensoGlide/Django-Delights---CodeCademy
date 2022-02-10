@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<head>
+    <h1> Django Delights</h1>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    <a href="{% url 'home' %}">Homepage</a>
+    <a href="{% url 'ingredients' %}">Ingredient Inventory</a>
+    <a href="{% url 'menu' %}">Menu</a>
+    <a href="{% url 'purchases' %}">Purchases</a>
+    <a href="{% url 'revenue' %}">Revenue Report</a>
+    <a href="{% url 'logout' %}">Log Out</a>
+    {% block content %}
+    {% endblock %}
+</body>

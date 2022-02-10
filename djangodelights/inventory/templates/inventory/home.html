@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<head>
+    <!-- <link rel="stylesheet" href="{% static 'inventory/header.css' %}"> -->
+    <h1> Django Delights</h1>
+    <h2> Welcome {{name}}! </h2>
+</head>
+<body>
+    <ul>
+        <li> <a href="{% url 'ingredients' %}">Ingredient Inventory</a> </li>
+        <li> <a href="{% url 'menu' %}">Menu</a> </li>
+        <li> <a href="{% url 'purchases' %}">Purchases</a> </li>
+        <li> <a href="{% url 'revenue' %}">Revenue Report</a></li>
+        <li> <a href="{% url 'logout' %}">Log Out</a> </li>
+    </ul>
+</body>
+    
+    
+    
+    
+    

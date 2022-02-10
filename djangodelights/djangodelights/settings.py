@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'inventory.apps.InventoryConfig',
+    'inventory', # ANTES TINHA ISTO inventory.apps.InventoryConfig MAS ASSIM NÃO CONSEGUI ACEDER AO CSS
 ]
 
 MIDDLEWARE = [
