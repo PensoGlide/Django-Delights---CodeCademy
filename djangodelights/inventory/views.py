@@ -33,4 +33,4 @@ def logout(request):
 class SignUp(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy("login")
-    template_name = "inventory/login.html"
+    template_name = "registration/signup.html"
