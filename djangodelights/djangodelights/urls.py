@@ -20,11 +20,11 @@ from inventory import views
 urlpatterns = [
     path('', views.home, name="home"),
     path('admin/', admin.site.urls),
-    path('', views.ingredients, name="ingredients"),
-    path('', views.menu, name="menu"),
-    path('', views.purchases, name="purchases"),
-    path('', views.revenue, name="revenue"),
-    path('', views.logout, name="logout"),
+    path('ingredients/', views.ingredients, name="ingredients"),
+    path('menu/', views.menu, name="menu"),
+    path('purchases/', views.purchases, name="purchases"),
+    path('revenue/', views.revenue, name="revenue"),
+    path('account/', views.logout, name="logout"),
     path("account/", include("django.contrib.auth.urls")),
     path("signup/", views.SignUp.as_view(), name="signup"),
 ]
