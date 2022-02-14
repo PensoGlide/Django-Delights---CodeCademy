@@ -7,8 +7,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.views.generic.edit import CreateView
 
+from .models import Ingredient, MenuItem, Purchase, RecipeRequirement
+from .forms import IngredientForm, MenuItemForm, RecipeRequirementForm
+
 # Create your views here.
-#@login_required BASTA TIRAR ISTO DOS COMENTARIOS PARA VOLTAR A SER A PRIMEIRA PAGINA
+@login_required #BASTA TIRAR ISTO DOS COMENTARIOS PARA VOLTAR A SER A PRIMEIRA PAGINA
 def home(request):
     username = {"name": "Rasco"}
     return render(request, "inventory/home.html", username)
@@ -16,6 +19,11 @@ def home(request):
 def ingredients(request):
     username = {"name": "Rasco"}
     return render(request, "inventory/ingredients.html", username)
+
+class NewIngredientView(LoginRequiredMixin, CreateView):
+    template_name = "inventory/add_ingredient.html"
+    model = Ingredient
+    form_class = IngredientForm
 
 def menu(request):
     username = {"name": "Rasco"}
@@ -28,6 +36,18 @@ def purchases(request):
 def revenue(request):
     username = {"name": "Rasco"}
     return render(request, "inventory/revenue.html", username)
+
+class NewMenuItemView(LoginRequiredMixin, CreateView):
+    template_name = "inventory/add_menu_item.html"
+    model = MenuItem
+    form_class = MenuItemForm
+
+
+class NewRecipeRequirementView(LoginRequiredMixin, CreateView):
+    template_name = "inventory/add_recipe_requirement.html"
+    model = RecipeRequirement
+    form_class = RecipeRequirementForm
+
 
 def logout(request):
     username = {"name": "Rasco"}

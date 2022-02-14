@@ -8,16 +8,19 @@
 
 {% block content %}
 <h2>Ingredients:</h2>
+<p><a href="{% url 'add_ingredient' %}">Add new a ingredient to the stock</a></p>
 <table>
   <tr>
     <th>Ingredient</th>
-    <th>Price (€) / unit</th>
     <th>Quantity Available</th>
+    <th>Unit</th>
+    <th>Price (€) / unit</th>
   </tr>
   <tr>
       <td> Pato </td>
-      <td> 3€ </td>
       <td> 3 </td>
+      <td> kg </td>
+      <td> 3€ </td>
   </tr>
 </table>
 {% endblock %}

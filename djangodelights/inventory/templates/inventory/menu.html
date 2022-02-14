@@ -8,13 +8,26 @@
 
 {% block content %}
 <h2>Menu:</h2>
+<p><a href="{% url 'add_menu_item' %}">Add New Item to Menu</a></p>
+<p><a href="{% url 'add_recipe_requirement' %}">Add Recipe Requirement for an Existing Menu Item</a></p>
 <table>
   <tr>
     <th>Recipe</th>
-    <th>Price (€)</th>
     <th>Ingredients required</th>
+    <th>Price (€)</th>
   </tr>
   <tr>
+    {% for menu_item in object_list %}
+        <td>class="menu-item-title">{{ menu_item.title }}</td>
+        <td class="menu-item-price">${{ menu_item.price|stringformat:".2f" }}</td>
+        <td>
+          <ul class="menu-item-ingredients">
+                {% for recipe_requirement in menu_item.reciperequirement_set.all %}
+                <li>{{ recipe_requirement.quantity }} {{recipe_requirement.ingredient.unit }} {{ recipe_requirement.ingredient.name }}</li>
+                {% endfor %}
+          </ul>
+        </td>
+    {% endfor %}
       <td> Pato no poum </td>
       <td> 3€ </td>
       <td> 3 batas </td>
