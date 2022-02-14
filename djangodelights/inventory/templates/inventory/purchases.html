@@ -7,18 +7,26 @@
 {% endblock %}
 
 {% block content %}
-<h2>Purchases:</h2>
+<h2>Totals:</h2>
+    <div style="color: green;">Total Revenue: {{ revenue|stringformat:".2f" }}€</div>
+    <div style="color: red;">Total Cost: {{ total_cost|stringformat:".2f" }}€</div>
+    <div style="color: blue;">Total Profit: {{ profit|stringformat:".2f" }}€</div>
+
+<h2>Purchases and Revenue:</h2>
+<p><a href="{% url 'add_purchase' %}">Add a new purchase</a></p>
 <table>
   <tr>
     <th>Item</th>
     <th>Quantity</th>
     <th>Price (€)</th>
   </tr>
+  {% for menu in object_list %}
   <tr>
-      <td> Pato no poum </td>
-      <td> 3€ </td>
-      <td> 3 batas </td>
+      <td> {{menu.menu_item.title}} </td>
+      <td> {{menu.timestamp}} </td>
+      <td> {{menu.menu_item.price}} </td>
   </tr>
+  {% endfor %}
 </table>
 {% endblock %}
 

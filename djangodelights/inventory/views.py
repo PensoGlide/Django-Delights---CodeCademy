@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.db.models import Sum
 
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
@@ -9,7 +10,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic import TemplateView, ListView
 
 from .models import Ingredient, MenuItem, Purchase, RecipeRequirement
-from .forms import IngredientForm, MenuItemForm, RecipeRequirementForm
+from .forms import IngredientForm, MenuItemForm, RecipeRequirementForm, PurchaseForm
 
 # Create your views here.
 @login_required #BASTA TIRAR ISTO DOS COMENTARIOS PARA VOLTAR A SER A PRIMEIRA PAGINA
@@ -30,9 +31,31 @@ class MenuView(LoginRequiredMixin, ListView):
     template_name = "inventory/menu.html"
     model = MenuItem
 
-def purchases(request):
-    username = {"name": "Rasco"}
-    return render(request, "inventory/purchases.html", username)
+class PurchaseView(LoginRequiredMixin, ListView):
+    template_name = "inventory/purchases.html"
+    model = Purchase
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["purchases"] = Purchase.objects.all()
+        revenue = Purchase.objects.aggregate(
+            revenue=Sum("menu_item__price"))["revenue"]
+        total_cost = 0
+        for purchase in Purchase.objects.all():
+            for recipe_requirement in purchase.menu_item.reciperequirement_set.all():
+                total_cost += recipe_requirement.ingredient.price_per_unit * \
+                    recipe_requirement.quantity
+
+        context["revenue"] = revenue
+        context["total_cost"] = total_cost
+        context["profit"] = revenue - total_cost
+
+        return context
+
+class NewPurchaseView(LoginRequiredMixin, CreateView):
+    template_name = "inventory/add_purchase.html"
+    model = Purchase
+    form_class = PurchaseForm
 
 def revenue(request):
     username = {"name": "Rasco"}

@@ -27,7 +27,9 @@ urlpatterns = [
     path('menu/new', views.NewMenuItemView.as_view(), name="add_menu_item"),
     path('reciperequirement/new', views.NewRecipeRequirementView.as_view(), name="add_recipe_requirement"),
 
-    path('purchases/', views.purchases, name="purchases"),
+    path('purchases/', views.PurchaseView.as_view(), name="purchases"),
+    path('purchases/new', views.NewPurchaseView.as_view(), name="add_purchase"),
+
     path('revenue/', views.revenue, name="revenue"),
     path('account/', views.logout, name="logout"),
     path("account/", include("django.contrib.auth.urls")),
