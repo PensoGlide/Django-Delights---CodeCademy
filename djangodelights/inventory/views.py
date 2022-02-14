@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.views.generic.edit import CreateView
+from django.views.generic import TemplateView, ListView
 
 from .models import Ingredient, MenuItem, Purchase, RecipeRequirement
 from .forms import IngredientForm, MenuItemForm, RecipeRequirementForm
@@ -16,18 +17,18 @@ def home(request):
     username = {"name": "Rasco"}
     return render(request, "inventory/home.html", username)
 
-def ingredients(request):
-    username = {"name": "Rasco"}
-    return render(request, "inventory/ingredients.html", username)
+class IngredientsView(LoginRequiredMixin, ListView):
+    template_name = "inventory/ingredients.html"
+    model = Ingredient
 
 class NewIngredientView(LoginRequiredMixin, CreateView):
     template_name = "inventory/add_ingredient.html"
     model = Ingredient
     form_class = IngredientForm
 
-def menu(request):
-    username = {"name": "Rasco"}
-    return render(request, "inventory/menu.html", username)
+class MenuView(LoginRequiredMixin, ListView):
+    template_name = "inventory/menu.html"
+    model = MenuItem
 
 def purchases(request):
     username = {"name": "Rasco"}

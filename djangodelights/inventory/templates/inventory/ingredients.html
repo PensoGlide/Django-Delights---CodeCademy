@@ -16,12 +16,15 @@
     <th>Unit</th>
     <th>Price (€) / unit</th>
   </tr>
+  {% for ingredient in object_list %}
   <tr>
-      <td> Pato </td>
-      <td> 3 </td>
-      <td> kg </td>
-      <td> 3€ </td>
+      <td> {{ingredient.name}} </td>
+      <td> {{ingredient.quantity}} </td>
+      <td> {{ingredient.unit}} </td>
+      <td> {{ingredient.price_per_unit}}€ </td>
   </tr>
+  {% endfor %}
+
 </table>
 {% endblock %}
 
